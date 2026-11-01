@@ -4,13 +4,20 @@
 ## Student Details
 
 - **Name:** D. Dinesh Sesha Sai
-- **Registration Number:** YOUR_REGISTRATION_NUMBER
+- **Registration Number:** 252U1R6063
 - **Section:** AI&ML-2B
 - **Course:** Backend Development Fundamentals
 
 ## Live Deployment
 
-**Vercel URL:** To be updated after deploying your own project.
+**Vercel URL:** https://backend-development-fundamentals-la-weld.vercel.app.
+
+| Endpoint | Description |
+|---|---|
+| `/` | Welcome message |
+| `/about` | Student information |
+| `/time` | Current date and time |
+| `/random` | 404 error handling |
 
 ## Objective
 
@@ -141,21 +148,6 @@ Open:
 - Generating date and time using `new Date()`.
 - Handling unknown routes with HTTP 404 status.
 - Deploying a Node.js application using Vercel.
-
-## Viva Questions
-
-**1. What is the difference between package.json and node_modules?**
-
-`package.json` stores project metadata and dependencies, while `node_modules` contains the installed packages.
-
-**2. What does app.listen() do?**
-
-It starts the Express server and listens for incoming HTTP requests on a specified port.
-
-**3. What do request and response represent?**
-
-`request` represents incoming client information, while `response` is used to send data back to the client.
-
 ## Conclusion
 
 Successfully developed a basic HTTP server using Node.js and an Express server with multiple GET routes, JSON responses, and 404 error handling. The application was also prepared for deployment using Vercel.
