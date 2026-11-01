@@ -33,19 +33,23 @@ To create a basic web server using Node.js built-in HTTP module and develop an E
 
 ## Project Structure
 
-```text
-BDF-Lab-01/
-├── api/
-│   └── index.js
-├── screenshots/
-├── .gitignore
-├── package.json
-├── package-lock.json
-├── plain-server.js
-├── server-http.js
-├── vercel.json
-└── README.md
-```
+Backend-Development-Fundamentals/
+└── lab-01/
+    ├── api/
+    │   └── index.js
+    ├── screenshots/
+    │   ├── home.png
+    │   ├── about.png
+    │   ├── time.png
+    │   ├── 404.png
+    │   └── server.png
+    ├── .gitignore
+    ├── package.json
+    ├── package-lock.json
+    ├── plain-server.js
+    ├── server-http.js
+    ├── vercel.json
+    └── README.md
 
 ## Prerequisites
 
@@ -64,17 +68,10 @@ npm -v
 
 Clone your repository:
 
-```bash
-git clone YOUR_GITHUB_REPOSITORY_URL
-cd YOUR_REPOSITORY_NAME
-cd BDF-Lab-01
-```
-
-Install dependencies:
-
-```bash
+git clone https://github.com/dinesh56142-svg/Backend-Development-Fundamentals.git
+cd Backend-Development-Fundamentals
+cd lab-01
 npm install
-```
 
 ## Running the Servers
 
