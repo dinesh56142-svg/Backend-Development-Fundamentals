@@ -1,15 +1,12 @@
 {
   "name": "bdf-lab-01",
   "version": "1.0.0",
-  "description": "",
+  "description": "Backend Development Fundamentals - Lab 1: Node.js and Express Server",
   "main": "server-http.js",
-  "homepage": "https://lab01-silk.vercel.app/",
   "scripts": {
-    "start": "node server-http.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node server-http.js"
   },
-  "keywords": [],
-  "author": "",
+  "author": "D. Dinesh Sesha Sai",
   "license": "ISC",
   "type": "commonjs",
   "dependencies": {

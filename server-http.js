@@ -1,35 +1,36 @@
-
 const express = require("express");
 
 const app = express();
 const PORT = process.env.PORT || 3000;
 
-// Route 1: Welcome page
+// GET /
 app.get("/", (request, response) => {
-    response.status(200).send("Welcome to my Node.js and Express Lab!");
+    response.status(200).send(
+        "Welcome to D. Dinesh Sesha Sai's Node.js and Express Lab!"
+    );
 });
 
-// Route 2: About information
+// GET /about
 app.get("/about", (request, response) => {
     response.status(200).json({
-        name: "G. Meghana",
-        section: "CSE GEN-AI-2A "
+        name: "D. Dinesh Sesha Sai",
+        section: "AI&ML-2B"
     });
 });
 
-// Route 3: Current date and time
+// GET /time
 app.get("/time", (request, response) => {
     response.status(200).json({
         currentDateTime: new Date()
     });
 });
 
-// 404 handler for unknown paths
+// 404 handler
 app.use((request, response) => {
     response.status(404).send("404 - Page Not Found");
 });
 
-// Start the server
+// Start locally, but export app for Vercel
 if (require.main === module) {
     app.listen(PORT, () => {
         console.log(`Express server running at http://localhost:${PORT}`);

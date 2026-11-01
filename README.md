@@ -1,114 +1,162 @@
-# BDF Lab 01 - Node.js & Express Basics
 
-A foundational backend development lab demonstrating how to build web servers using both Node.js built-in `http` module and the Express.js framework.
+# Lab 1: Node.js and Express Server
 
----
+## Student Details
 
-## 🌐 Live Deployment
+- **Name:** D. Dinesh Sesha Sai
+- **Registration Number:** YOUR_REGISTRATION_NUMBER
+- **Section:** AI&ML-2B
+- **Course:** Backend Development Fundamentals
 
-🔗 **Live URL:** [https://lab01-silk.vercel.app/](https://lab01-silk.vercel.app/)
+## Live Deployment
 
-- 🏠 **Home:** [https://lab01-silk.vercel.app/](https://lab01-silk.vercel.app/)
-- 👤 **About:** [https://lab01-silk.vercel.app/about](https://lab01-silk.vercel.app/about)
-- ⏰ **Time:** [https://lab01-silk.vercel.app/time](https://lab01-silk.vercel.app/time)
+**Vercel URL:** To be updated after deploying your own project.
 
----
+## Objective
 
-## 👤 Author Information
+To create a basic web server using Node.js built-in HTTP module and develop an Express.js server with different routes, HTTP status codes, JSON responses, and 404 error handling.
 
-- **Name:** G. Meghana
-- **Section:** CSE GEN-AI-2A
+## Technologies Used
 
----
+- Node.js
+- Express.js
+- JavaScript
+- Git and GitHub
+- Vercel
 
-## 📁 Project Structure
+## Project Structure
 
 ```text
 BDF-Lab-01/
-├── api/                  # Vercel serverless entry point
-├── node_modules/         # Installed dependencies (git ignored)
-├── screenshots/          # Output and verification screenshots
-├── .gitignore            # Git ignore file
-├── package.json          # Project metadata & dependencies
-├── package-lock.json     # Dependency lockfile
-├── plain-server.js       # Basic server using Node.js 'http' module
-├── server-http.js        # Express.js server with routes and 404 handler
-├── vercel.json           # Vercel deployment & routing config
-└── README.md             # Project documentation
+├── api/
+│   └── index.js
+├── screenshots/
+├── .gitignore
+├── package.json
+├── package-lock.json
+├── plain-server.js
+├── server-http.js
+├── vercel.json
+└── README.md
 ```
 
----
+## Prerequisites
 
-## 🚀 Getting Started
+- Node.js 18 or later
+- npm
+- Visual Studio Code
 
-### Prerequisites
+Check installed versions:
 
-Ensure you have [Node.js](https://nodejs.org/) (v18 or higher recommended) installed.
-
-Check versions:
 ```bash
 node -v
 npm -v
 ```
 
-### Installation
+## Installation
 
-Clone the repository and install dependencies:
+Clone your repository:
 
 ```bash
-git clone https://github.com/meghanagogineni919-stack/LAB-1.git
-cd LAB-1
+git clone YOUR_GITHUB_REPOSITORY_URL
+cd YOUR_REPOSITORY_NAME
+cd BDF-Lab-01
+```
+
+Install dependencies:
+
+```bash
 npm install
 ```
 
----
+## Running the Servers
 
-## 💻 Running the Servers
+### 1. Node.js HTTP Server
 
-### 1. Plain HTTP Server
-Runs a lightweight server built with the native Node.js `http` module:
+Run:
 
 ```bash
 node plain-server.js
 ```
-- **URL:** [http://localhost:3000](http://localhost:3000)
-- **Response:** Plain text `"Hello"`
 
----
+Open:
+
+`http://localhost:3000`
+
+Expected response:
+
+`Hello`
 
 ### 2. Express Server
-Runs an Express.js server with route handling:
+
+Run:
 
 ```bash
-node server-http.js
+npm start
 ```
-- **URL:** [http://localhost:3000](http://localhost:3000)
 
----
+Open:
 
-## 📡 API Endpoints (Express Server)
+`http://localhost:3000`
 
-| Method | Endpoint | Live Link | Description | Sample Response |
-| :--- | :--- | :--- | :--- | :--- |
-| `GET` | `/` | [Open /](https://lab01-silk.vercel.app/) | Welcome page | `Welcome to my Node.js and Express Lab!` |
-| `GET` | `/about` | [Open /about](https://lab01-silk.vercel.app/about) | Student / author details | `{"name": "G. Meghana", "section": "CSE GEN-AI-2A"}` |
-| `GET` | `/time` | [Open /time](https://lab01-silk.vercel.app/time) | Current date and timestamp | `{"currentDateTime": "2026-10-16T15:46:26.261Z"}` |
-| `*` | Any other route | [Open /random](https://lab01-silk.vercel.app/random) | 404 error handler | `404 - Page Not Found` |
+## API Endpoints
 
----
+| Method | Endpoint | Description | Status |
+|---|---|---|---|
+| GET | `/` | Displays welcome message | 200 |
+| GET | `/about` | Displays student name and section in JSON | 200 |
+| GET | `/time` | Displays current date and time | 200 |
+| GET | `/random` | Handles unknown routes | 404 |
 
-## 📸 Screenshots
+## Screenshots
 
-| Lab Execution & Output |
-| :---: |
-| ![Welcome & Output](screenshots/Screenshot%202026-10-16%20155259.png) |
-| ![About Route](screenshots/Screenshot%202026-10-16%20155602.png) |
-| ![Time Route](screenshots/Screenshot%202026-10-16%20155620.png) |
-| ![Terminal Execution](screenshots/Screenshot%202026-10-16%20155635.png) |
+### 1. Home Route
 
----
+![Home Route](screenshots/home.png)
 
-## 🛠️ Built With
+### 2. About Route
 
-- [Node.js](https://nodejs.org/) - JavaScript Runtime
-- [Express.js](https://expressjs.com/) - Web framework for Node.js
+![About Route](screenshots/about.png)
+
+### 3. Time Route
+
+![Time Route](screenshots/time.png)
+
+### 4. 404 Error Handling
+
+![404 Route](screenshots/404.png)
+
+### 5. Server Execution
+
+![Server Execution](screenshots/server.png)
+
+## Concepts Learned
+
+- Creating a Node.js project using `npm init`.
+- Understanding `package.json` and `node_modules`.
+- Creating an HTTP server using `http.createServer()`.
+- Installing and using Express.js.
+- Handling GET requests using Express routes.
+- Returning JSON responses.
+- Generating date and time using `new Date()`.
+- Handling unknown routes with HTTP 404 status.
+- Deploying a Node.js application using Vercel.
+
+## Viva Questions
+
+**1. What is the difference between package.json and node_modules?**
+
+`package.json` stores project metadata and dependencies, while `node_modules` contains the installed packages.
+
+**2. What does app.listen() do?**
+
+It starts the Express server and listens for incoming HTTP requests on a specified port.
+
+**3. What do request and response represent?**
+
+`request` represents incoming client information, while `response` is used to send data back to the client.
+
+## Conclusion
+
+Successfully developed a basic HTTP server using Node.js and an Express server with multiple GET routes, JSON responses, and 404 error handling. The application was also prepared for deployment using Vercel.
+
