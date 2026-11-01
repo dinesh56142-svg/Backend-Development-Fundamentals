@@ -9,8 +9,7 @@ const sqlite3 = require("sqlite3");
 const app = express();
 app.use(express.json());
 
-const isVercel = Boolean(process.env.VERCEL);
-const dbFolder = isVercel ? "/tmp" : path.join(__dirname, "database");
+const dbFolder = path.join(__dirname, "database");
 const dbPath = path.join(dbFolder, "library.db");
 
 let db = null;
@@ -30,7 +29,6 @@ const sampleBooks = [
   { id: 8, title: "The Alchemist", author: "Paulo Coelho", price: 299, pages: 208 },
   { id: 9, title: "Crime and Punishment", author: "Fyodor Dostoevsky", price: 420, pages: 430 },
   { id: 10, title: "The Da Vinci Code", author: "Dan Brown", price: 380, pages: 454 },
-
   { id: 11, title: "The Lord of the Rings", author: "J.R.R. Tolkien", price: 599, pages: 1178 },
   { id: 12, title: "Brave New World", author: "Aldous Huxley", price: 320, pages: 288 },
   { id: 13, title: "The Book Thief", author: "Markus Zusak", price: 399, pages: 584 },
@@ -84,87 +82,12 @@ const sampleBooks = [
 ];
 
 // =====================================================
-// FALLBACK DATABASE FOR SERVERLESS ENVIRONMENTS
-// =====================================================
-
-const createFallbackDB = () => {
-  let books = sampleBooks.map(book => ({ ...book }));
-
-  return {
-    async all() {
-      return [...books].sort((a, b) => a.id - b.id);
-    },
-
-    async get(query, params = []) {
-      if (query.includes("COUNT(*)")) {
-        return { count: books.length };
-      }
-
-      const id = Number(params[0]);
-      return books.find(book => book.id === id) || null;
-    },
-
-    async run(query, params = []) {
-      if (query.includes("INSERT INTO book")) {
-        const [title, author, price, pages] = params;
-        const id = Math.max(0, ...books.map(book => book.id)) + 1;
-
-        books.push({
-          id,
-          title,
-          author,
-          price: Number(price),
-          pages: Number(pages)
-        });
-
-        return { lastID: id, changes: 1 };
-      }
-
-      if (query.includes("UPDATE book")) {
-        const [title, author, price, pages, bookId] = params;
-        const id = Number(bookId);
-        const index = books.findIndex(book => book.id === id);
-
-        if (index === -1) return { changes: 0 };
-
-        books[index] = { id, title, author, price: Number(price), pages: Number(pages) };
-        return { changes: 1 };
-      }
-
-      if (query.includes("DELETE FROM book")) {
-        const id = Number(params[0]);
-        const originalLength = books.length;
-
-        books = books.filter(book => book.id !== id);
-
-        return { changes: originalLength - books.length };
-      }
-
-      return { changes: 0 };
-    },
-
-    async exec() {
-      return true;
-    }
-  };
-};
-
-// =====================================================
 // DATABASE INITIALIZATION
 // =====================================================
 
 const initializeDB = async () => {
   try {
     fs.mkdirSync(dbFolder, { recursive: true });
-
-    // Copy bundled database into Vercel's writable directory.
-    if (isVercel && !fs.existsSync(dbPath)) {
-      const sourceDb = path.join(__dirname, "database", "library.db");
-
-      if (fs.existsSync(sourceDb)) {
-        fs.copyFileSync(sourceDb, dbPath);
-      }
-    }
 
     db = await sqlite.open({
       filename: dbPath,
@@ -181,24 +104,25 @@ const initializeDB = async () => {
       );
     `);
 
-    // Add any missing sample books without duplicating existing IDs.
+    // Insert sample books without duplicating existing IDs.
     for (const book of sampleBooks) {
       await db.run(
-        `INSERT OR IGNORE INTO book (id, title, author, price, pages)
+        `INSERT OR IGNORE INTO book
+         (id, title, author, price, pages)
          VALUES (?, ?, ?, ?, ?)`,
         [book.id, book.title, book.author, book.price, book.pages]
       );
     }
 
-    const result = await db.get("SELECT COUNT(*) AS count FROM book");
+    const result = await db.get(
+      "SELECT COUNT(*) AS count FROM book"
+    );
 
     console.log(`Database initialized. Total books: ${result.count}`);
 
   } catch (error) {
-    console.error("SQLite initialization failed:", error.message);
-    console.warn("Switching to the in-memory fallback database.");
-
-    db = createFallbackDB();
+    console.error("SQLite initialization failed:", error);
+    throw error;
   }
 };
 
@@ -213,12 +137,16 @@ app.use(async (req, res, next) => {
     await dbPromise;
     next();
   } catch (error) {
-    res.status(500).json({ error: "Database initialization failed" });
+    console.error("Database middleware error:", error);
+    res.status(500).json({
+      error: "Database initialization failed"
+    });
   }
 });
 
 // =====================================================
 // ROOT ROUTE
+// GET /
 // =====================================================
 
 app.get("/", (req, res) => {
@@ -257,7 +185,9 @@ app.get(["/books/:bookId", "/books/:bookId/"], async (req, res) => {
     );
 
     if (!book) {
-      return res.status(404).json({ message: "Book not found" });
+      return res.status(404).json({
+        message: "Book not found"
+      });
     }
 
     res.status(200).json(book);
@@ -298,6 +228,7 @@ app.post(["/books", "/books/"], async (req, res) => {
       message: "Book Added Successfully",
       bookId: result.lastID
     });
+
   } catch (error) {
     res.status(500).json({ error: error.message });
   }
@@ -335,12 +266,15 @@ app.put(["/books/:bookId", "/books/:bookId/"], async (req, res) => {
     );
 
     if (result.changes === 0) {
-      return res.status(404).json({ message: "Book not found" });
+      return res.status(404).json({
+        message: "Book not found"
+      });
     }
 
     res.status(200).json({
       message: "Book Details Updated Successfully"
     });
+
   } catch (error) {
     res.status(500).json({ error: error.message });
   }
@@ -356,7 +290,9 @@ app.delete(["/books/:bookId", "/books/:bookId/"], async (req, res) => {
     const bookId = Number(req.params.bookId);
 
     if (!Number.isInteger(bookId) || bookId <= 0) {
-      return res.status(400).json({ error: "Invalid book ID" });
+      return res.status(400).json({
+        error: "Invalid book ID"
+      });
     }
 
     const result = await db.run(
@@ -365,28 +301,38 @@ app.delete(["/books/:bookId", "/books/:bookId/"], async (req, res) => {
     );
 
     if (result.changes === 0) {
-      return res.status(404).json({ message: "Book not found" });
+      return res.status(404).json({
+        message: "Book not found"
+      });
     }
 
     res.status(200).json({
       message: "Book Deleted Successfully"
     });
+
   } catch (error) {
     res.status(500).json({ error: error.message });
   }
 });
 
 // =====================================================
-// START SERVER LOCALLY
-// Vercel uses api/index.js to export the app.
+// START SERVER
+// LOCAL + RENDER
 // =====================================================
 
-if (!isVercel) {
-  dbPromise.then(() => {
-    app.listen(3000, () => {
-      console.log("Server running at http://localhost:3000/");
+const PORT = process.env.PORT || 3000;
+
+if (require.main === module) {
+  dbPromise
+    .then(() => {
+      app.listen(PORT, "0.0.0.0", () => {
+        console.log(`Server running on port ${PORT}`);
+      });
+    })
+    .catch((error) => {
+      console.error("Failed to start server:", error);
+      process.exit(1);
     });
-  });
 }
 
 module.exports = app;
