@@ -39,12 +39,16 @@ lab-02/
 │   ├── update-book.png
 │   ├── updated-book.png
 │   ├── delete-book.png
-│   └── deleted-book.png
+│   ├── deleted-book.png
+│   ├── live-post-book.png
+│   ├── live-update-book.png
+│   └── live-delete-book.png
 ├── .gitignore
 ├── app.js
 ├── package.json
 ├── package-lock.json
-└── README.md
+├── README.md
+└── vercel.json
 ```
 
 ## Project Links
@@ -77,25 +81,23 @@ lab-02/
 
 ### 1. Navigate to the Lab 2 directory
 
-Run these commands from the repository root:
-
 ```bash
 cd lab-02
 ```
 
-### 2. Install dependencies
+### 2. Install Dependencies
 
 ```bash
 npm install
 ```
 
-### 3. Start the server in development mode
+### 3. Start the Server in Development Mode
 
 ```bash
 npm run dev
 ```
 
-### 4. Start the server normally
+### 4. Start the Server Normally
 
 Alternatively, run:
 
@@ -109,7 +111,7 @@ The local application runs at:
 
 ## CRUD API Endpoints
 
-The same routes are available on the local server and the deployed Render service.
+The same API routes are available on the local server and the deployed Render service.
 
 | HTTP Method | Endpoint | Description |
 |---|---|---|
@@ -156,7 +158,7 @@ The same routes are available on the local server and the deployed Render servic
 | 404 Not Found | Requested book does not exist |
 | 500 Internal Server Error | Server-side error |
 
-## Lab Execution and Verification Screenshots
+## Local Lab Execution and Verification Screenshots
 
 ### 1. Home Route
 
@@ -194,6 +196,28 @@ The same routes are available on the local server and the deployed Render servic
 
 ![Deleted Book](screenshots/deleted-book.png)
 
+## Live Deployment Testing Screenshots
+
+The deployed API was tested using Postman. All three write operations returned successful HTTP responses.
+
+### 1. Create a Book – POST
+
+**HTTP Status:** 201 Created
+
+![Live POST Book](screenshots/live-post-book.png)
+
+### 2. Update a Book – PUT
+
+**HTTP Status:** 200 OK
+
+![Live Update Book](screenshots/live-update-book.png)
+
+### 3. Delete a Book – DELETE
+
+**HTTP Status:** 200 OK
+
+![Live Delete Book](screenshots/live-delete-book.png)
+
 ## Implementation Highlights
 
 - Integrated SQLite with Node.js and Express.js.
@@ -229,6 +253,11 @@ The application is deployed as a Render Web Service.
 
 ### Deployment Notes
 
-- The service uses the free Render instance, which may spin down after a period of inactivity. The first request after inactivity can take longer while the service starts again.
-- The free instance does not provide persistent local disk storage. SQLite data written to the local database file may be lost when the service restarts or is redeployed. The 60 sample records are initialized when the database is created.
+- The service uses the Render Free instance, which may spin down after inactivity. The first request after inactivity can take longer while the service starts again.
+- The free instance does not provide persistent local disk storage. SQLite data written to the local database file may be lost when the service restarts or is redeployed.
+- The database initializes 60 sample records when it is created.
 - The project is connected to the GitHub `main` branch. New pushes can trigger a redeployment.
+
+## Conclusion
+
+The Lab 2 project successfully demonstrates SQLite database integration and CRUD operations using Node.js and Express.js. All API operations were tested locally and on the live Render deployment using Postman and a web browser.
