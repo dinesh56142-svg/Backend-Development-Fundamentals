@@ -18,11 +18,13 @@
   "dependencies": {
     "express": "^5.3.0",
     "sqlite": "^5.1.1",
-    "sqlite3": "^6.0.1"
+    "sqlite3": "^5.1.7"
   },
   "devDependencies": {
     "nodemon": "^3.1.14"
   },
   "type": "commonjs",
-  "allowScripts": ["sqlite3"]
+  "allowScripts": [
+    "sqlite3"
+  ]
 }
