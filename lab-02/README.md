@@ -14,14 +14,13 @@
 - SQLite
 - JavaScript
 - Postman
+- Render (Deployment)
 
 ## Project Description
 
 This project demonstrates SQLite database integration with a Node.js and Express.js application.
 
-It implements CRUD (Create, Read, Update, Delete) operations for managing a library of books.
-
-The database is initialized with 60 sample books.
+It implements CRUD (Create, Read, Update, Delete) operations for managing a library of books. The database is initialized with 60 sample book records.
 
 ## Project Structure
 
@@ -45,15 +44,17 @@ lab-02/
 ├── app.js
 ├── package.json
 ├── package-lock.json
-├── README.md
-└── vercel.json
+└── README.md
+```
 
 ## Project Links
 
 - **GitHub Repository:** https://github.com/dinesh56142-svg/Backend-Development-Fundamentals
-- **Localhost Home:** http://localhost:3000/
-- **All Books:** http://localhost:3000/books
-- **Live Deployment:** Pending deployment
+- **Render Live API:** https://backend-development-fundamentals-lab-02-6uo4.onrender.com
+- **Live Home Route:** https://backend-development-fundamentals-lab-02-6uo4.onrender.com/
+- **Live All Books:** https://backend-development-fundamentals-lab-02-6uo4.onrender.com/books
+- **Local Home Route:** http://localhost:3000/
+- **Local All Books:** http://localhost:3000/books
 
 ## Database Details
 
@@ -72,37 +73,43 @@ lab-02/
 | `price` | REAL | Price of the book |
 | `pages` | INTEGER | Number of pages |
 
-## Installation and Execution
+## Installation and Local Execution
 
-### 1. Navigate to the project directory
+### 1. Navigate to the Lab 2 directory
+
+Run these commands from the repository root:
 
 ```bash
 cd lab-02
 ```
 
-### 2. Install Dependencies
+### 2. Install dependencies
 
 ```bash
 npm install
 ```
 
-### 3. Start the Server in Development Mode
+### 3. Start the server in development mode
 
 ```bash
 npm run dev
 ```
 
-### 4. Start the Server Normally
+### 4. Start the server normally
+
+Alternatively, run:
 
 ```bash
 npm start
 ```
 
-The application runs at:
+The local application runs at:
 
 `http://localhost:3000/`
 
 ## CRUD API Endpoints
+
+The same routes are available on the local server and the deployed Render service.
 
 | HTTP Method | Endpoint | Description |
 |---|---|---|
@@ -196,9 +203,32 @@ The application runs at:
 - Used parameterized SQL queries.
 - Implemented request validation and appropriate HTTP status codes.
 - Tested API endpoints using Postman and a web browser.
+- Configured the Express server to use the deployment platform's assigned port.
 
-## Deployment
+## Deployment on Render
 
-**Status:** Pending deployment.
+**Deployment Platform:** Render  
+**Deployment Status:** Live
 
-The application has been tested locally. The live deployment URL will be added after successful deployment.
+The application is deployed as a Render Web Service.
+
+### Render Configuration
+
+| Setting | Value |
+|---|---|
+| Runtime | Node |
+| Branch | `main` |
+| Root Directory | `lab-02` |
+| Build Command | `npm install` |
+| Start Command | `npm start` |
+
+### Live API
+
+- **Base URL:** https://backend-development-fundamentals-lab-02-6uo4.onrender.com
+- **All Books:** https://backend-development-fundamentals-lab-02-6uo4.onrender.com/books
+
+### Deployment Notes
+
+- The service uses the free Render instance, which may spin down after a period of inactivity. The first request after inactivity can take longer while the service starts again.
+- The free instance does not provide persistent local disk storage. SQLite data written to the local database file may be lost when the service restarts or is redeployed. The 60 sample records are initialized when the database is created.
+- The project is connected to the GitHub `main` branch. New pushes can trigger a redeployment.
