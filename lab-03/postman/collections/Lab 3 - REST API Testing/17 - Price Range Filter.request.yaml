@@ -1,0 +1,7 @@
+$kind: http-request
+url: http://localhost:5000/books?min_price=300&max_price=500
+method: GET
+queryParams:
+  min_price: "300"
+  max_price: "500"
+order: 18000

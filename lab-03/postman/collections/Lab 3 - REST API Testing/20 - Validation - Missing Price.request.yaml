@@ -1,0 +1,20 @@
+$kind: http-request
+description: ""
+url: http://localhost:5000/books
+method: POST
+body:
+  type: json
+  content: "{\r
+
+    \  \"title\": \"Missing Price Book\",\r
+
+    \  \"author\": \"Test Author\"\r
+
+    }"
+settings:
+  protocolVersion: auto
+  strictSSL: false
+  followRedirects: true
+  disableCookies: false
+  maxResponseSize: 52428800
+order: 22000

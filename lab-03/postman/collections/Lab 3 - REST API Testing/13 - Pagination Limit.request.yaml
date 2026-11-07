@@ -1,0 +1,13 @@
+$kind: http-request
+description: ""
+url: http://localhost:5000/books?limit=5
+method: GET
+queryParams:
+  limit: "5"
+settings:
+  protocolVersion: auto
+  strictSSL: false
+  followRedirects: true
+  disableCookies: false
+  maxResponseSize: 52428800
+order: 14000

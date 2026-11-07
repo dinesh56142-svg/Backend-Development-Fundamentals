@@ -1,0 +1,6 @@
+$kind: http-request
+url: http://localhost:5000/books?search_q=Harry
+method: GET
+queryParams:
+  search_q: Harry
+order: 10000

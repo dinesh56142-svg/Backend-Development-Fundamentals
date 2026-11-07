@@ -1,0 +1,15 @@
+$kind: http-request
+url: http://localhost:5000/books
+method: POST
+body:
+  type: json
+  content: "{\r
+
+    \  \"title\": \"Valid Book Title\",\r
+
+    \  \"author\": \"\",\r
+
+    \  \"price\": 250\r
+
+    }"
+order: 24000

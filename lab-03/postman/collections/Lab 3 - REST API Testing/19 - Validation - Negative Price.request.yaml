@@ -1,0 +1,15 @@
+$kind: http-request
+url: http://localhost:5000/books
+method: POST
+body:
+  type: json
+  content: "{\r
+
+    \  \"title\": \"Negative Price Book\",\r
+
+    \  \"author\": \"Test Author\",\r
+
+    \  \"price\": -100\r
+
+    }"
+order: 20000

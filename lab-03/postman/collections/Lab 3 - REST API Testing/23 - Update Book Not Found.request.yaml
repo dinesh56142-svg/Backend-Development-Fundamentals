@@ -1,0 +1,15 @@
+$kind: http-request
+url: http://localhost:5000/books/999
+method: PUT
+body:
+  type: json
+  content: "{\r
+
+    \  \"title\": \"Non Existing Book\",\r
+
+    \  \"author\": \"Test Author\",\r
+
+    \  \"price\": 300\r
+
+    }"
+order: 25000

@@ -1,0 +1,7 @@
+$kind: http-request
+url: http://localhost:5000/books?order_by=price&order=ASC
+method: GET
+queryParams:
+  order_by: price
+  order: ASC
+order: 11000

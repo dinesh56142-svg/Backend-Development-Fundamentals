@@ -1,0 +1,15 @@
+$kind: http-request
+url: http://localhost:5000/books
+method: POST
+body:
+  type: json
+  content: "{\r
+
+    \  \"title\": \"The Pragmatic Programmer\",\r
+
+    \  \"author\": \"Andrew Hunt\",\r
+
+    \  \"price\": 450\r
+
+    }"
+order: 4000

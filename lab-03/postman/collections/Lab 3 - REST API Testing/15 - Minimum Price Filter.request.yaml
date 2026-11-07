@@ -1,0 +1,13 @@
+$kind: http-request
+description: ""
+url: http://localhost:5000/books?min_price=400
+method: GET
+queryParams:
+  min_price: "400"
+settings:
+  protocolVersion: auto
+  strictSSL: false
+  followRedirects: true
+  disableCookies: false
+  maxResponseSize: 52428800
+order: 16000
