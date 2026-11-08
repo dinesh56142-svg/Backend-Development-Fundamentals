@@ -1,5 +1,5 @@
 $kind: http-request
-url: http://localhost:5000/books?max_price=300
+url: https://backend-development-fundamentals-lab-03.onrender.com/books?max_price=300
 method: GET
 queryParams:
   max_price: "300"

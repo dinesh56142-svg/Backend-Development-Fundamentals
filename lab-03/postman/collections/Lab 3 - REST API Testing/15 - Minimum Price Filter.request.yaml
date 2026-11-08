@@ -1,6 +1,6 @@
 $kind: http-request
 description: ""
-url: http://localhost:5000/books?min_price=400
+url: https://backend-development-fundamentals-lab-03.onrender.com/books?min_price=400
 method: GET
 queryParams:
   min_price: "400"

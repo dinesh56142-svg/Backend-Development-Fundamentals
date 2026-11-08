@@ -1,5 +1,5 @@
 $kind: http-request
-url: http://localhost:5000/books?order_by=price&order=DESC
+url: https://backend-development-fundamentals-lab-03.onrender.com/books?order_by=price&order=DESC
 method: GET
 queryParams:
   order_by: price

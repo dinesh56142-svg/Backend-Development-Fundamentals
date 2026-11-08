@@ -1,0 +1,266 @@
+{
+  "info": {
+    "name": "Lab 3 - REST API Testing",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "01 - Get All Books",
+      "request": {
+        "method": "GET",
+        "url": "https://backend-development-fundamentals-lab-03.onrender.com/books"
+      }
+    },
+    {
+      "name": "02 - Get Single Book",
+      "request": {
+        "method": "GET",
+        "url": "https://backend-development-fundamentals-lab-03.onrender.com/books/1"
+      }
+    },
+    {
+      "name": "03 - Book Not Found",
+      "request": {
+        "method": "POST",
+        "url": "https://backend-development-fundamentals-lab-03.onrender.com/books/999"
+      }
+    },
+    {
+      "name": "04 - Create New Book",
+      "request": {
+        "method": "POST",
+        "url": "https://backend-development-fundamentals-lab-03.onrender.com/books",
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n  \"title\": \"The Pragmatic Programmer\",\r\n  \"author\": \"Andrew Hunt\",\r\n  \"price\": 450\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        }
+      }
+    },
+    {
+      "name": "05 - Update Existing Book",
+      "request": {
+        "method": "PUT",
+        "url": "https://backend-development-fundamentals-lab-03.onrender.com/books/17",
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n  \"title\": \"The Pragmatic Programmer - Updated\",\r\n  \"author\": \"Andrew Hunt\",\r\n  \"price\": 500\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        }
+      }
+    },
+    {
+      "name": "06 - Delete Existing Book",
+      "request": {
+        "method": "DELETE",
+        "url": "https://backend-development-fundamentals-lab-03.onrender.com/books/18"
+      }
+    },
+    {
+      "name": "07 - Validation - Missing Title",
+      "request": {
+        "method": "POST",
+        "url": "https://backend-development-fundamentals-lab-03.onrender.com/books",
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n  \"author\": \"Test Author\",\r\n  \"price\": 300\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        }
+      }
+    },
+    {
+      "name": "08 - Validation - Missing Author",
+      "request": {
+        "method": "POST",
+        "url": "https://backend-development-fundamentals-lab-03.onrender.com/books",
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n  \"title\": \"Test Book\",\r\n  \"price\": 300\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        }
+      }
+    },
+    {
+      "name": "09 - Get All 52 Books",
+      "request": {
+        "method": "GET",
+        "url": "https://backend-development-fundamentals-lab-03.onrender.com/books?limit=100"
+      }
+    },
+    {
+      "name": "10 - Search Books",
+      "request": {
+        "method": "GET",
+        "url": "https://backend-development-fundamentals-lab-03.onrender.com/books?search_q=Harry"
+      }
+    },
+    {
+      "name": "11 - Sort Books by Price ASC",
+      "request": {
+        "method": "GET",
+        "url": "https://backend-development-fundamentals-lab-03.onrender.com/books?order_by=price&order=ASC"
+      }
+    },
+    {
+      "name": "12 - Sort Books by Price DESC",
+      "request": {
+        "method": "GET",
+        "url": "https://backend-development-fundamentals-lab-03.onrender.com/books?order_by=price&order=DESC"
+      }
+    },
+    {
+      "name": "13 - Pagination Limit",
+      "request": {
+        "method": "GET",
+        "url": "https://backend-development-fundamentals-lab-03.onrender.com/books?limit=5"
+      }
+    },
+    {
+      "name": "14 - Pagination Offset",
+      "request": {
+        "method": "GET",
+        "url": "https://backend-development-fundamentals-lab-03.onrender.com/books?limit=5&offset=5"
+      }
+    },
+    {
+      "name": "15 - Minimum Price Filter",
+      "request": {
+        "method": "GET",
+        "url": "https://backend-development-fundamentals-lab-03.onrender.com/books?min_price=400"
+      }
+    },
+    {
+      "name": "16 - Maximum Price Filter",
+      "request": {
+        "method": "GET",
+        "url": "https://backend-development-fundamentals-lab-03.onrender.com/books?max_price=300"
+      }
+    },
+    {
+      "name": "17 - Price Range Filter",
+      "request": {
+        "method": "GET",
+        "url": "https://backend-development-fundamentals-lab-03.onrender.com/books?min_price=300&max_price=500"
+      }
+    },
+    {
+      "name": "18 - Validation - Non Numeric Price",
+      "request": {
+        "method": "POST",
+        "url": "https://backend-development-fundamentals-lab-03.onrender.com/books",
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n  \"title\": \"Invalid Price Book\",\r\n  \"author\": \"Test Author\",\r\n  \"price\": \"abc\"\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        }
+      }
+    },
+    {
+      "name": "19 - Validation - Negative Price",
+      "request": {
+        "method": "POST",
+        "url": "https://backend-development-fundamentals-lab-03.onrender.com/books",
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n  \"title\": \"Negative Price Book\",\r\n  \"author\": \"Test Author\",\r\n  \"price\": -100\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        }
+      }
+    },
+    {
+      "name": "20 - Validation - Missing Price",
+      "request": {
+        "method": "POST",
+        "url": "https://backend-development-fundamentals-lab-03.onrender.com/books",
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n  \"title\": \"Missing Price Book\",\r\n  \"author\": \"Test Author\"\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        }
+      }
+    },
+    {
+      "name": "21 - Validation - Empty Title",
+      "request": {
+        "method": "POST",
+        "url": "https://backend-development-fundamentals-lab-03.onrender.com/books",
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n  \"title\": \"\",\r\n  \"author\": \"Test Author\",\r\n  \"price\": 250\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        }
+      }
+    },
+    {
+      "name": "22 - Validation - Empty Author",
+      "request": {
+        "method": "POST",
+        "url": "https://backend-development-fundamentals-lab-03.onrender.com/books",
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n  \"title\": \"Valid Book Title\",\r\n  \"author\": \"\",\r\n  \"price\": 250\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        }
+      }
+    },
+    {
+      "name": "23 - Update Book Not Found",
+      "request": {
+        "method": "PUT",
+        "url": "https://backend-development-fundamentals-lab-03.onrender.com/books/999",
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n  \"title\": \"Non Existing Book\",\r\n  \"author\": \"Test Author\",\r\n  \"price\": 300\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        }
+      }
+    },
+    {
+      "name": "24 - Delete Book Not Found",
+      "request": {
+        "method": "DELETE",
+        "url": "https://backend-development-fundamentals-lab-03.onrender.com/books/999"
+      }
+    }
+  ]
+}

@@ -1,5 +1,5 @@
 $kind: http-request
-url: http://localhost:5000/books?limit=100
+url: https://backend-development-fundamentals-lab-03.onrender.com/books?limit=100
 method: GET
 queryParams:
   limit: "100"

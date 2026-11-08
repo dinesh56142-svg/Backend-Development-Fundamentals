@@ -1,4 +1,4 @@
 $kind: http-request
-url: "\thttp://localhost:5000/books/18"
+url: https://backend-development-fundamentals-lab-03.onrender.com/books/18
 method: DELETE
 order: 6000
